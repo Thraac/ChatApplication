@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     # my apps
     'chat',
     'channels',
+    'account',
+    'crispy_forms',
 ]
 
 MIDDLEWARE = [
@@ -137,3 +139,5 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+CRISPY_TEMPLATE_PACK="bootstrap4"
