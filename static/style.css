@@ -1,0 +1,14 @@
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+#chat-container {
+    box-shadow: 0 0 3px;
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 1px;
+}
+#message-container {
+    box-shadow: 0 0 5px;
+}
