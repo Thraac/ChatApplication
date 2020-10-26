@@ -106,3 +106,9 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+#school related
+school.java
+school.py
+school.js

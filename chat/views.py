@@ -12,7 +12,6 @@ from .models import Thread, ChatMessage
 
 class InboxView(LoginRequiredMixin, ListView):
     # currently a generic view
-    template_name = 'chat/inbox.html'
     def get_queryset(self):
         return Thread.objects.by_user(self.request.user)
 
@@ -56,3 +55,15 @@ class ThreadView(LoginRequiredMixin, FormMixin, DetailView):
         message = form.cleaned_data.get("message")
         ChatMessage.objects.create(user=user, thread=thread, message=message)
         return super().form_valid(form)
+
+class SearchView(LoginRequiredMixin, ListView):
+    # currently a generic view
+    template_name = 'chat/search.html'
+    def get_queryset(self):
+        return Thread.objects.by_user(self.request.user)
+
+def thread_list_view(request, *args, **kwargs):
+    template_name = 'chat/inbox.html'
+    queryset = Thread.objects.by_user(request.user)
+    context = {"object_list": queryset}
+    return render(request, template_name, context)

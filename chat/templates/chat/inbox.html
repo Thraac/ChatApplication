@@ -3,4 +3,14 @@
 {% block content %}
 
 
+{% for chat in object_list %}
+    <ul>
+        {% if user == chat.first %}
+            <li><a href={{ chat.second }}>{{ chat.roomname }}</a></li>
+        {% else %}
+            <li><a href={{ chat.first }}>{{ chat.roomname }}</a></li>
+        {% endif %}
+    </ul>
+{% endfor %}
+
 {% endblock %}

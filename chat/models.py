@@ -50,6 +50,11 @@ class Thread(models.Model):
     def room_group_name(self):
         return f'chat_{self.id}'
 
+    @property
+    def roomname(self):
+        roomname = f"Chat room between {self.first} and {self.second}\n"
+        return roomname
+
     def broadcast(self, msg=None):
         if msg is not None:
             broadcast_msg_to_chat(msg, group_name=self.room_group_name, user='admin')
