@@ -2,8 +2,11 @@
 
 {% block content %}
 <div class="search-bar mt-sm-2 mr-2">
-    <form method="get">
-        <input type="text" class="form-control"  name="q" id="id_q" placeholder="Search...">
+    <form method="POST" name='search_user'>
+        {% csrf_token %}
+        <input type="text" class="form-control" name="search_user" id="search_user" placeholder="Search...">
+        <input type='submit' class='btn btn-primary'/>
     </form>
 </div>
+{{ username }}
 {% endblock %}

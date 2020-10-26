@@ -1,8 +1,9 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import Http404, HttpResponseForbidden
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.views.generic.edit import FormMixin
+from django.contrib.auth.models import User
 
 from django.views.generic import DetailView, ListView
 
@@ -56,11 +57,19 @@ class ThreadView(LoginRequiredMixin, FormMixin, DetailView):
         ChatMessage.objects.create(user=user, thread=thread, message=message)
         return super().form_valid(form)
 
-class SearchView(LoginRequiredMixin, ListView):
-    # currently a generic view
+def search_list_view(request, *args, **kwargs):
     template_name = 'chat/search.html'
-    def get_queryset(self):
-        return Thread.objects.by_user(self.request.user)
+    form_class = ComposeForm
+    search_id = request.POST.get('search_user')
+    username = User.objects.filter(username=f'{search_id}')
+
+    if search_id != None:
+        new_url = f'http://127.0.0.1:8000/chat/{search_id}'
+        return redirect(new_url)
+    
+    context = {'username': username}
+    return render(request, template_name, context)
+
 
 def thread_list_view(request, *args, **kwargs):
     template_name = 'chat/inbox.html'
