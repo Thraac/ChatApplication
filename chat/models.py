@@ -46,20 +46,16 @@ class Thread(models.Model):
     
     objects      = ThreadManager()
 
+    # this creates the roomname as a number
     @property
     def room_group_name(self):
         return f'chat_{self.id}'
 
+    # used to generate the room name
     @property
     def roomname(self):
         roomname = f"Chat room between {self.first} and {self.second}\n"
         return roomname
-
-    def broadcast(self, msg=None):
-        if msg is not None:
-            broadcast_msg_to_chat(msg, group_name=self.room_group_name, user='admin')
-            return True
-        return False
 
 
 class ChatMessage(models.Model):

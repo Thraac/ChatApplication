@@ -57,20 +57,19 @@ class ThreadView(LoginRequiredMixin, FormMixin, DetailView):
         ChatMessage.objects.create(user=user, thread=thread, message=message)
         return super().form_valid(form)
 
+# searches for the user specified and takes the searcher to that chat room
 def search_list_view(request, *args, **kwargs):
     template_name = 'chat/search.html'
     form_class = ComposeForm
     search_id = request.POST.get('search_user')
-    username = User.objects.filter(username=f'{search_id}')
-
+    context = {}
     if search_id != None:
         new_url = f'http://127.0.0.1:8000/chat/{search_id}'
         return redirect(new_url)
     
-    context = {'username': username}
     return render(request, template_name, context)
 
-
+# lists all chats the user is in 
 def thread_list_view(request, *args, **kwargs):
     template_name = 'chat/inbox.html'
     queryset = Thread.objects.by_user(request.user)

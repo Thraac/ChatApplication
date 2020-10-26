@@ -1,8 +1,8 @@
 {% extends "base.html" %}
-
+{% block header %}
+<h1 class='p-0 m-0'>Your Chat Rooms</h1>
+{% endblock %}
 {% block content %}
-
-
 {% for chat in object_list %}
     <ul>
         {% if user == chat.first %}

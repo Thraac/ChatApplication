@@ -1,6 +1,10 @@
 {% extends 'base.html' %}
 {% load crispy_forms_tags  %}
 
+{% block header %}
+<h1 class='p-0 m-0'>Account Creation</h1>
+{% endblock %}
+
 {% block content %}
     <form method="POST" class="form-group">
         {% csrf_token %}

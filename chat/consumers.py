@@ -28,6 +28,7 @@ class ChatConsumer(AsyncConsumer):
     # when the socket gets a message
     async def websocket_receive(self, event):
 
+        # handles the input and gets it ready to broadcast
         front_text = event.get('text', None)
         if front_text is not None:
             loaded_dict_data = json.loads(front_text)

@@ -1,6 +1,8 @@
 {% extends "base.html" %}
 {% load static %}
-
+{% block header %}
+<h1 class='p-0 m-0'>Chat Room with {% if user != object.first %}{{ object.first }}{% else %}{{ object.second }}{% endif %}</h1>
+{% endblock %}
 {% block content %}
 <div id='chat-container'>
 <ul id='chat-items'>
@@ -39,13 +41,11 @@
 
     // what the socket does with a message
     socket.onmessage = function(e){
-        console.log('message', e)
         var chatDataMsg = JSON.parse(e.data)
         chatHolder.append("<li>" + "<b>" + chatDataMsg.username + ": " + "</b>" + chatDataMsg.message + "</li>")
     }
     
     socket.onopen = function(e){
-        console.log('open', e)
         // sends the data back as json data and resets the input
         formData.submit(function(event){
             event.preventDefault()
@@ -58,13 +58,6 @@
         })
     }
 
-    socket.onerror = function(e){
-        console.log('error', e)
-    }
-
-    socket.onclose = function(e){
-        console.log('close', e)
-    }
 
 </script>
 {% endblock %}

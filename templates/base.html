@@ -23,7 +23,9 @@
         <div class='container'>
             <div class='row border-bottom my-3 py-3'>
                 <div class='col'>
-                    <h1 class='p-0 m-0'>Chat Room with {% if user != object.first %}{{ object.first }}{% else %}{{ object.second }}{% endif %}</h1>
+                    {% block header %}
+
+                    {% endblock %}
                 </div>
             </div>
             {% block content %}
